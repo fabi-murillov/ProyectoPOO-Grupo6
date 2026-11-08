@@ -1,20 +1,22 @@
+package entidades;
+
 import java.util.ArrayList;
 
 public class Aplicacion {
 
-    //Atributos
+    // Atributos
     private Administrador administrador;
     private ArrayList<Cancion> catalogo;
     private ArrayList<Usuario> usuarios;
 
-    //Constructor completo
+    // Constructor completo
     public Aplicacion(Administrador administrador, ArrayList<Cancion> catalogo, ArrayList<Usuario> usuarios) {
         this.administrador = administrador;
         this.catalogo = catalogo;
         this.usuarios = usuarios;
     }
 
-    //Getters
+    // Getters
     public Administrador getAdministrador() {
         return administrador;
     }
@@ -27,7 +29,7 @@ public class Aplicacion {
         return usuarios;
     }
 
-    //Setters
+    // Setters
     public void setAdministrador(Administrador administrador) {
         this.administrador = administrador;
     }
@@ -40,6 +42,10 @@ public class Aplicacion {
         this.usuarios = usuarios;
     }
 
+    public boolean hayAdministrador() {
+        return administrador != null;
+    }
+
     public void agregarCancion(Cancion cancion) {
         catalogo.add(cancion);
     }
@@ -48,10 +54,21 @@ public class Aplicacion {
         usuarios.add(usuario);
     }
 
-    //toString()
+    // Busca un usuario por su nombre de usuario 
+    public Usuario buscarUsuario(String nombreUsuario) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    // toString()
     @Override
     public String toString() {
-        return "Aplicacion de streaming musical\nAdministrador: " + administrador.getNombreUsuario() +
+        return "Aplicacion de streaming musical\nAdministrador: " +
+                (administrador == null ? "sin registrar" : administrador.getNombreUsuario()) +
                 "\nCanciones en el catalogo: " + catalogo.size() +
                 "\nUsuarios registrados: " + usuarios.size();
     }
